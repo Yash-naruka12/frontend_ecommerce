@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaRegHeart } from "react-icons/fa";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 
 const Products = ({ data }) => {

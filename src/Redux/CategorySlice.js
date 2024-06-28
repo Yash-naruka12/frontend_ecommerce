@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import { STATUS } from "../Helper/Status";
 import { BASE_URL } from "../Helper/Api";
-import axios from "axios";
 
 const initialState = {
   categories: [],
@@ -13,14 +13,8 @@ const initialState = {
 export const fetchAsyncCategory = createAsyncThunk(
   "category/fetch",
   async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}products/categories`);
-      const data = await res.data;
-      return data;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+    const response = await axios.get(`${BASE_URL}products/categories`);
+    return response.data;
   }
 );
 
@@ -32,14 +26,14 @@ const CategorySlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAsyncCategory.pending, (state, action) => {
+      .addCase(fetchAsyncCategory.pending, (state) => {
         state.categoryStatus = STATUS.PENDING;
       })
       .addCase(fetchAsyncCategory.fulfilled, (state, action) => {
         state.categories = action.payload;
         state.categoryStatus = STATUS.SUCCEEDED;
       })
-      .addCase(fetchAsyncCategory.rejected, (state, action) => {
+      .addCase(fetchAsyncCategory.rejected, (state) => {
         state.categoryStatus = STATUS.REJECTED;
       });
   },

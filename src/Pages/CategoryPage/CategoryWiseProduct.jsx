@@ -12,46 +12,45 @@ import Loader from "../../Helper/Loader";
 const CategoryWiseProduct = () => {
   const { category } = useParams();
   const products = useSelector(getAllProducts);
+  const status = useSelector(productStatus);
 
   const settings = {
-    slidesToShow: 4.3,
+    slidesToShow: 4, // Adjust as needed
     slidesToScroll: 1,
     autoplaySpeed: 2000,
-    centerMode: true, // Enable center mode
-    centerPadding: "60px", // Adjust the padding as needed
+    centerMode: true,
+    centerPadding: "60px",
     responsive: [
       {
         breakpoint: 1080,
         settings: {
           slidesToShow: 3,
-          centerPadding: "40px", // Adjust the padding for screens between 1080px and 768px
+          centerPadding: "40px",
         },
       },
       {
         breakpoint: 860,
         settings: {
           slidesToShow: 2,
-          centerPadding: "30px", // Adjust the padding for screens between 768px and 480px
+          centerPadding: "30px",
         },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-          centerPadding: "20px", // Adjust the padding for screens below 480px
+          centerPadding: "20px",
         },
       },
     ],
   };
 
   const getCategoryProduct = products.filter(
-    (cat) => cat.category === category
+    (product) => product.category === category
   );
 
-  const status = useSelector(productStatus);
-
   return (
-    <div className=" p-16 bg-[#d3d3d3]">
+    <div className="p-16 bg-[#d3d3d3]">
       {status === STATUS.PENDING ? (
         <Loader />
       ) : (

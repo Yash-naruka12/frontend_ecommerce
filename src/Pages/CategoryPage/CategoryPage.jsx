@@ -11,7 +11,7 @@ const CategoryPage = ({ data }) => {
             <div className="w-56 min-h-[400px] pb-2 bg-white rounded-xl shadow-xl z-10">
               <div className="relative">
                 <img
-                  src={data.images[0]}
+                  src={data.images[0]} // Assuming images is an array and always has at least one element
                   className="w-full h-[200px] object-cover rounded-t-xl"
                   alt="product"
                 />
@@ -24,11 +24,12 @@ const CategoryPage = ({ data }) => {
                   {data.title}
                 </div>
                 <div className="flex py-2">
-                  <div className="flex justify-between item-center">
+                  <div className="flex justify-between items-center">
                     <div>
                       <p className="text-gray-600 font-bold text-xs md:text-sm ml-1 flex items-center">
                         <span className="text-gray-500 font-normal">
-                          <Rating value={data.rating} />
+                          {data.rating && <Rating value={data.rating} />}{" "}
+                          {/* Conditionally render Rating if data.rating is defined */}
                         </span>
                         ({data.rating})
                       </p>

@@ -6,14 +6,18 @@ import { IoMdCart } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
-import { getAllCategories } from "../../Redux/CategorySlice";
 import "./Header.css";
 import { getCart } from "../../Redux/CartSlice";
-
+const linkItems = [
+  "Fragrances",
+  "Groceries",
+  "Home-Decoration",
+  "Furniture",
+  "Laptops",
+];
 const Header = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isHeaderFixed, setHeaderFixed] = useState(false);
-  const category = useSelector(getAllCategories);
   const cartItem = useSelector(getCart);
 
   useEffect(() => {
@@ -141,7 +145,7 @@ const Header = () => {
           <span className="sr-only">Close menu</span>
         </button>
         <div className="px-6 text-center">
-          {category.map((cat, index) => (
+          {linkItems.map((cat, index) => (
             <p key={index} className="mb-2">
               <Link
                 to={`category/${cat}`}
